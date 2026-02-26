@@ -10,6 +10,8 @@
   "exclude": [
     "node_modules",
     "scripts",
-    "dist"
+    "dist",
+    "prisma",
+    "prisma.config.ts"
   ]
 }
