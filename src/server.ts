@@ -22,7 +22,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // Allow requests with no origin (e.g. curl, mobile apps, server-to-server)
       if (!origin) return callback(null, true)
       if (allowedOrigins.includes(origin)) return callback(null, true)
