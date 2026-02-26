@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  reviews      Review[]
+  createdAt    DateTime @default(now())
+}
+
+model Category {
+  id      String @id @default(uuid())
+  name    String @unique
+  books   Book[]
+}
+
+model Book {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  author      String
+  description String
+  price       String
+  imageUrl    String?
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  reviews     Review[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  bookId    String
+  userId    String
+  book      Book     @relation(fields: [bookId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, bookId], name: "unique_user_book")
+}
