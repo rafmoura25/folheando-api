@@ -1,0 +1,11 @@
+[phases.install]
+cmds = ["npm install --ignore-scripts"]
+
+[phases.build]
+cmds = [
+  "DATABASE_URL=postgresql://placeholder:placeholder@localhost:5432/placeholder npx prisma generate",
+  "npm run build"
+]
+
+[start]
+cmd = "npx prisma migrate deploy && node dist/server.js"
