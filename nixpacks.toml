@@ -8,4 +8,4 @@ cmds = [
 ]
 
 [start]
-cmd = "npx prisma migrate deploy && node dist/server.js"
+cmd = "node -e \"console.log('DATABASE_URL set:', !!process.env.DATABASE_URL)\" && npx prisma migrate deploy && node dist/server.js"
