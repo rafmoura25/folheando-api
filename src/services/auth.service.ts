@@ -1,5 +1,5 @@
 import { prisma } from "../prisma"
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 import { generateToken } from "../utils/jwt"
 
 export async function register(name: string, email: string, password: string) {
